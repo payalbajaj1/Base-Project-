@@ -1,0 +1,62 @@
+    GENERAL
+
+        sudo apt-get install build-essential linux-headers-$(uname -r)
+        sudo apt-get install python-software-properties
+        sudo apt-get install software-properties-common
+        sudo apt-get install libpcre3 libpcre3-dev libssl-dev
+
+    GIT latest stable
+
+        sudo add-apt-repository ppa:git-core/ppa
+
+    REDIS latest stable
+
+        sudo add-apt-repository ppa:chris-lea/redis-server
+
+    MYSQL MARIA DB 10.1
+
+        sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
+        sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mirror.fibergrid.in/mariadb/repo/10.1/ubuntu trusty main
+
+    MONGO DB 3.4
+
+        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+
+    INSTALL ALLL NOW
+
+        sudo apt-get update -y
+        sudo apt-get install git
+        sudo apt-get install redis-server
+        sudo apt-get install graphicsmagick
+        sudo apt-get install mariadb-server
+        sudo apt-get install -y mongodb-org
+
+    NODE with version manager
+
+        curl -L https://git.io/n-install | bash
+
+    NPM
+        curl -0 -L https://npmjs.org/install.sh | sh
+
+
+    CREATE MYSQL USER and DB
+
+        CREATE DATABASE baseProjectDev CHARACTER SET utf8 COLLATE utf8_bin;
+        CREATE USER 'baseProjectDev'@'localhost' IDENTIFIED BY 'baseProjectDev';
+        GRANT ALL PRIVILEGES ON baseProjectDev.* TO 'baseProjectDev'@'localhost' WITH GRANT OPTION;
+        GRANT ALTER ROUTINE, CREATE ROUTINE, EXECUTE ON baseProjectDev.* TO 'baseProjectDev'@'localhost' ;
+        FLUSH PRIVILEGES;
+
+    Create Admin User
+
+        use admin
+        var user = {"user":"admin","pwd":"manager",roles:[{"role":"userAdminAnyDatabase","db":"admin"}]};
+        db.createUser(user);
+        exit
+
+    Connect with the Admnistrator user
+        mongo admin -u admin -p
+        use baseProjectDev
+        var user={"user":"baseProjectDev","pwd":"baseProjectDev",roles:[{"role":"readWrite","db":"baseProjectDev"}]};
+        db.createUser(user);
+        exit
